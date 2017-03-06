@@ -20,3 +20,10 @@ const ret = ['-', 'いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな'
 const mapped = source.map(x => ret[x]);
 
 mapped.subscribe(x => console.log(x));
+
+const one = Rx.Observable.timer(1000).map('1秒');
+const two = Rx.Observable.timer(2000).map('2秒');
+
+const merge = one.merge(two);
+
+merge.subscribe(x => console.log(x));
