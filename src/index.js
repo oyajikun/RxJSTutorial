@@ -27,3 +27,11 @@ const two = Rx.Observable.timer(2000).map('2秒');
 const merge = one.merge(two);
 
 merge.subscribe(x => console.log(x));
+
+const xs = Rx.Observable.interval(1000).take(5);
+const ys = Rx.Observable.interval(2000).take(5);
+const zs = Rx.Observable.interval(3000).take(5);
+const pattern = xs.and(ys).and(zs);
+const plan = pattern.thenDo((x, y, z) => `${x}:${y}:${z}`);
+const planed = Rx.Observable.when(plan);
+planed.subscribe(x => console.log(x));
